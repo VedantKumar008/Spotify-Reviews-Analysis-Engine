@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 import { Filter, Download, RefreshCw, Users, TrendingUp, Activity } from 'lucide-react'
 
+// API URL configuration with fallback for local development
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000/api'
+
 const UserSegments = () => {
   const [selectedSegment, setSelectedSegment] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -13,7 +16,7 @@ const UserSegments = () => {
     // Fetch real data from API
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/api/segments')
+        const response = await fetch(`${API_URL}/segments`)
         const data = await response.json()
         
         setSegmentData(data.segments || [])

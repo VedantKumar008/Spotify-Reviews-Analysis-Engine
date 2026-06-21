@@ -9,6 +9,9 @@ import {
   Play
 } from 'lucide-react'
 
+// API URL configuration with fallback for local development
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000/api'
+
 const Layout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [isIngesting, setIsIngesting] = useState(false)
@@ -28,7 +31,7 @@ const Layout = ({ children }) => {
     setIngestionMessage('Starting ingestion...')
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/ingest', {
+      const response = await fetch(`${API_URL}/ingest`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

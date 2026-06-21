@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 import { TrendingUp, TrendingDown, Users, MessageSquare, Activity, AlertCircle } from 'lucide-react'
 
+// API URL configuration with fallback for local development
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000/api'
+
 const Dashboard = () => {
   const [stats, setStats] = useState({
     totalReviews: 0,
@@ -18,7 +21,7 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         // Fetch stats
-        const statsResponse = await fetch('http://127.0.0.1:5000/api/stats')
+        const statsResponse = await fetch(`${API_URL}/stats`)
         const statsData = await statsResponse.json()
         setStats({
           totalReviews: statsData.total_reviews || 0,
@@ -28,12 +31,12 @@ const Dashboard = () => {
         })
 
         // Fetch sentiment data
-        const sentimentResponse = await fetch('http://127.0.0.1:5000/api/sentiment')
+        const sentimentResponse = await fetch(`${API_URL}/sentiment`)
         const sentimentData = await sentimentResponse.json()
         setSentimentData(sentimentData.sentiment_trend || [])
 
         // Fetch topic data
-        const topicResponse = await fetch('http://127.0.0.1:5000/api/topics')
+        const topicResponse = await fetch(`${API_URL}/topics`)
         const topicData = await topicResponse.json()
         const formattedTopicData = (topicData.topics || []).slice(0, 5).map(topic => ({
           name: topic.topic,

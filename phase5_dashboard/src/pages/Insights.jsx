@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { Filter, Download, RefreshCw, Lightbulb, TrendingUp, AlertTriangle, CheckCircle } from 'lucide-react'
 
+// API URL configuration with fallback for local development
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000/api'
+
 const Insights = () => {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [loading, setLoading] = useState(false)
@@ -14,7 +17,7 @@ const Insights = () => {
     // Fetch real data from API
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/api/insights')
+        const response = await fetch(`${API_URL}/insights`)
         const data = await response.json()
         
         setOpportunities(data.opportunities || [])
