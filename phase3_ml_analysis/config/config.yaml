@@ -1,0 +1,33 @@
+# Spotify Reviews Analysis Engine - Phase 3 Configuration
+
+# MongoDB Configuration (for reading from Phase 2)
+mongodb:
+  connection_string: mongodb://localhost:27017
+  database: spotify_reviews
+  collection: processed_reviews
+
+# Sentiment Analysis
+sentiment_analysis:
+  confidence_threshold: 0.5
+
+# Topic Modeling
+topic_modeling:
+  method: lda  # Options: lda, kmeans, dbscan
+  n_topics: 10
+  max_features: 1000
+  min_df: 2
+  max_df: 0.8
+
+# Pattern Recognition
+pattern_recognition:
+  min_frequency: 5
+  confidence_threshold: 0.6
+
+# Behavior Analysis
+behavior_analysis:
+  min_frequency: 3
+
+# Insight Extraction
+insight_extraction:
+  min_frequency: 5
+  severity_threshold: 0.5

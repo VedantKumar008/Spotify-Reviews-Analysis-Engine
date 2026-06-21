@@ -1,0 +1,59 @@
+# Spotify Reviews Analysis Engine - Phase 2 Configuration
+
+# MongoDB Configuration (for reading from Phase 1)
+mongodb:
+  connection_string: mongodb://localhost:27017
+  database: spotify_reviews
+  collection: reviews
+
+# Spam Detection
+spam_detection:
+  threshold: 0.7
+  num_permutations: 128
+
+# Deduplication
+deduplication:
+  near_duplicate_threshold: 0.8
+  num_permutations: 128
+  lsh_threshold: 0.7
+
+# Quality Filter
+quality_filter:
+  min_length: 20
+  max_length: 10000
+  min_words: 3
+  language_threshold: 0.7
+  relevance_threshold: 0.5
+
+# Text Normalization
+text_normalization:
+  remove_stopwords: true
+  lemmatize: true
+  handle_emojis: true
+  lowercase: true
+
+# Entity Recognition
+entity_recognition:
+  use_spacy: true
+  extract_genres: true
+  extract_artists: true
+  extract_moods: true
+
+# Metadata Enrichment
+metadata_enrichment:
+  min_reviews_for_profile: 3
+  enable_user_profiling: true
+
+# Data Validation
+data_validation:
+  required_fields:
+    - source
+    - review_id
+    - content
+  optional_fields:
+    - rating
+    - author
+    - timestamp
+    - url
+    - metadata
+  quality_threshold: 0.7

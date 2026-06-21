@@ -1,0 +1,30 @@
+# Spotify Reviews Analysis Engine - Phase 4 Configuration
+
+# MongoDB Configuration (for reading from Phase 3)
+mongodb:
+  connection_string: mongodb://localhost:27017
+  database: spotify_reviews
+  collection: ml_analyzed_reviews
+
+# Summarization
+summarization:
+  max_sentences: 5
+  min_sentence_length: 10
+
+# Segmentation
+segmentation:
+  method: hybrid  # Options: clustering, rule_based, hybrid
+  n_clusters: 6
+
+# Taxonomy
+taxonomy:
+  min_theme_frequency: 5
+
+# Opportunity Mapping
+opportunity_mapping:
+  impact_threshold: 0.6
+  feasibility_threshold: 0.5
+
+# Hypothesis Generation
+hypothesis_generation:
+  min_support_score: 0.5
