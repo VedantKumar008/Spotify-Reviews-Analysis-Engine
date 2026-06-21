@@ -61,7 +61,18 @@ class MongoDBStorage:
             bool: True if connection successful, False otherwise
         """
         try:
-            self.client = MongoClient(self.connection_string)
+            # Configure SSL/TLS for MongoDB Atlas compatibility
+            client_options = {
+                'serverSelectionTimeoutMS': 5000,  # 5 second timeout
+                'connectTimeoutMS': 10000,  # 10 second timeout
+            }
+            
+            # Add TLS settings for Atlas connections
+            if 'mongodb+srv://' in self.connection_string or 'ssl=true' in self.connection_string.lower():
+                client_options['tls'] = True
+                client_options['tlsAllowInvalidCertificates'] = False
+            
+            self.client = MongoClient(self.connection_string, **client_options)
             self.db = self.client[self.database_name]
             self.collection = self.db[self.collection_name]
             
